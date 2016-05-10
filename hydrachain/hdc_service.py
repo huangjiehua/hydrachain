@@ -138,7 +138,6 @@ class ChainService(eth_ChainService):
     config = None
     block_queue_size = 1024
     transaction_queue_size = 1024
-    processed_gas = 0
     processed_elapsed = 0
     min_block_time = 1.  # time we try to wait for more transactions after the first
 
@@ -293,8 +292,7 @@ class ChainService(eth_ChainService):
             st = time.time()
             block = t_block.to_block(env=self.chain.env)
             elapsed = time.time() - st
-            log.debug('deserialized', elapsed='%.4fs' % elapsed, ts=time.time(),
-                      gas_used=block.gas_used, gpsec=self.gpsec(block.gas_used, elapsed))
+            log.debug('deserialized', elapsed='%.4fs' % elapsed, ts=time.time())
             assert block.header.check_pow()
         except processblock.InvalidTransaction as e:
             log.warn('invalid transaction', block=t_block, error=e, FIXME='ban node')

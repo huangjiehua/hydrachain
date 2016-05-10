@@ -16,7 +16,7 @@ from pyethapp.console_service import Console
 from pyethapp.db_service import DBService
 from pyethapp.jsonrpc import JSONRPCServer
 from pyethapp.accounts import AccountsService, Account
-import pyethapp.config as konfig
+import pyethapp.konfig as konfig
 import ethereum.slogging as slogging
 from ethereum.utils import denoms
 import pyethapp.app as pyethapp_app
@@ -64,7 +64,7 @@ pyethapp_app.app.help = b'Welcome to %s' % HPCApp.client_version_string
 # set morden profile
 for p in pyethapp_app.app.params:
     if p.name == 'profile':
-        p.default = 'morden'
+        p.default = 'livenet'
 
 
 @pyethapp_app.app.command(help='run in a zero config default configuration')
@@ -77,7 +77,6 @@ for p in pyethapp_app.app.params:
 @click.pass_context
 def rundummy(ctx, num_validators, node_num, seed):
     base_port = 29870
-
     # reduce key derivation iterations
     PBKDF2_CONSTANTS['c'] = 100
 
